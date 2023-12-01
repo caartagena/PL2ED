@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1695642541 source:c:\users\profesor\documents\Ej3_clase_clientes\main.cpp
+	<iostream>
+	<stdlib.h>
+	<ctime>
+	<string.h>
+
+1697111937 source:d:\uah\curso_2023_24\labeedd\ej3_clase_clientes\main.cpp
+	"cliente.h"
+
+1697112229 source:d:\uah\curso_2023_24\labeedd\ej3_clase_clientes\cliente.cpp
+	"cliente.h"
+
+1697112231 d:\uah\curso_2023_24\labeedd\ej3_clase_clientes\cliente.h
+	<string>
+	<iostream>
+	<stdlib.h>
+	<ctime>
+

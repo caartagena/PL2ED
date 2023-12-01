@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1610645505 source:c:\users\josemiguel\documents\uah\curso_20_21\lab_eedd\ejemplos_cbp\abb_enteros\main.cpp
+	<iostream>
+	"ABB_Enteros.h"
+
+1610645527 c:\users\josemiguel\documents\uah\curso_20_21\lab_eedd\ejemplos_cbp\abb_enteros\abb_enteros.h
+	<iostream>
+
+1610645411 source:c:\users\josemiguel\documents\uah\curso_20_21\lab_eedd\ejemplos_cbp\abb_enteros\abb_enteros.cpp
+	"ABB_Enteros.h"
+
+1610645411 source:c:\users\josemiguel\documents\uah\curso_2021_2022\labeedd\ejemplos_cbp\abb_enteros\abb_enteros.cpp
+	"ABB_Enteros.h"
+
+1610645527 c:\users\josemiguel\documents\uah\curso_2021_2022\labeedd\ejemplos_cbp\abb_enteros\abb_enteros.h
+	<iostream>
+
+1610645505 source:c:\users\josemiguel\documents\uah\curso_2021_2022\labeedd\ejemplos_cbp\abb_enteros\main.cpp
+	<iostream>
+	"ABB_Enteros.h"
+
