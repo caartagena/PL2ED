@@ -3,6 +3,10 @@
     "files.associations": {
         "array": "cpp",
         "tuple": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp",
+        "string": "cpp",
+        "new": "cpp"
     }
 }
