@@ -17,30 +17,45 @@ Lista::~Lista()
         fin=NULL;
 }
 
-void Lista::insertarNodo(Reserva2 v, char c) 
+void Lista::insertarNodo(Reserva2 v, char c, Lista& lista) 
 {
-    pnodo aux;
+    pnodo nuevo;
+    nuevo = new Nodo(v);
     char tipoInsercion;
     tipoInsercion=c;
-    if(listaVacia()) { // Si la lista está vacía
-        aux = new Nodo(v,NULL,NULL);
-        fin=cabeza=aux;
+
+    if(tipoInsercion=='p') {//Inserción por el Principio
+        if(lista.cabeza==NULL) {
+            lista.cabeza = nuevo;
+            lista.fin = nuevo;
+            nuevo->siguiente = NULL;
+            nuevo->anterior = NULL;
+        }
+        else {
+            nuevo->siguiente = lista.cabeza;
+            lista.cabeza->anterior = nuevo;
+            nuevo->anterior = NULL;
+            lista.cabeza = nuevo;
+        }
     }
-    else if (tipoInsercion=='f') {//Inserción por el final
-        aux= new Nodo(v,NULL,NULL);
-        aux->anterior=fin;
-        fin->siguiente=aux;
-        fin=aux;
+    else if(tipoInsercion=='f') {//Inserción por el Final
+        if(lista.cabeza==NULL) {
+            lista.cabeza = nuevo;
+            lista.fin = nuevo;
+            nuevo->siguiente = NULL;
+            nuevo->anterior = NULL;
+        }
+        else {
+            lista.fin->siguiente = nuevo;
+            nuevo->siguiente = NULL;
+            nuevo->anterior = lista.fin;
+            lista.fin = nuevo;
+        }
     }
-    else if (tipoInsercion=='p') {//Inserción por el principio
-        aux= new Nodo(v,NULL,NULL);
-        aux->siguiente=cabeza;
-        cabeza->anterior=aux;
-        cabeza=aux;
-    }
+    v.mostrarDatos();   
 }
 
-void Lista::borrarNodo(Reserva2 v,char c)
+void Lista::borrarNodo(Reserva2 v,char c, Lista& lista)
 {
     char tipoBorrado;
     tipoBorrado=c;
@@ -79,18 +94,18 @@ void Lista::borrarNodo(Reserva2 v,char c)
     }
 }
 
-void Lista::mostrarLista(){
+void Lista::mostrarLista(Lista& lista){
     pnodo aux;
-    aux=cabeza;
+    aux=lista.cabeza;
     while(aux!=NULL){
         aux->valor.mostrarDatos();
         aux=aux->siguiente;
     }
 }
 
-bool Lista::listaVacia()
+bool Lista::listaVacia(Lista& lista)
 {
-    return cabeza == NULL;
+    return lista.cabeza == NULL;
 }
 
 void Lista::esSiguiente()
@@ -118,8 +133,3 @@ bool Lista::esActual()
     return actual != NULL;
 }
 
-Reserva2 Lista::valorActual() // Cambia 'int' a 'Reserva2'
-{
-    if (!listaVacia()) return actual->valor;
-     else return Reserva2(); // Devuelve un objeto 'Reserva2' vacío
-}

@@ -33,17 +33,16 @@ class Lista
     public:
         Lista() {cabeza=actual=fin=NULL; }
         ~Lista();
-        void insertarNodo(Reserva2 v, char c);
+        void insertarNodo(Reserva2 v, char c, Lista& lista);
         void insertarNodoIntAntes(Reserva2 v, int posicion);
-        void borrarNodo(Reserva2 v,char c);
-        bool listaVacia();
-        void mostrarLista();
+        void borrarNodo(Reserva2 v,char c,Lista& lista);
+        bool listaVacia(Lista& lista);
+        void mostrarLista(Lista& lista);
         void esSiguiente();
         void esAnterior();
         void esPrimero();
         void esUltimo();
         bool esActual();
-        Reserva2 valorActual();
 };
 
 

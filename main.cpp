@@ -14,32 +14,34 @@ Reserva2::Reserva2(int numReserva, string nombreCliente, string situacion, int n
     preferenciaMenu=preferenciaMenu;
 }
 Reserva2::~Reserva2(){}
+int contador=1;
 Reserva2 generarReservaAle(){
-    Reserva2* reserva=new Reserva2();
-    int numReserva=getNumReserva();
-    string nombreCliente=getNombreCliente();
-    string situacion=getSituacion();
-    int numPersonas=getNumPersonas();
-    string hora=getHora();
-    string preferenciaMenu=getPreferenciaMenu();
-    cout<<"Reserva generada: "<<endl;
-    cout<<"Numero de reserva: "<<numReserva<<endl;
-    cout<<"Nombre del cliente: "<<nombreCliente<<endl;
-    cout<<"Situacion: "<<situacion<<endl;
-    cout<<"Numero de personas: "<<numPersonas<<endl;
-    cout<<"Hora: "<<hora<<endl;
-    cout<<"Preferencia de menu: "<<preferenciaMenu<<endl;
-    cout<<endl;
-    return *reserva;
+    Reserva2 reserva;
+    int numReserva=contador;
+    string nombreCliente = reserva.getNombreCliente();
+    string situacion = reserva.getSituacion();
+    int numPersonas = reserva.getNumPersonas();
+    string hora = reserva.getHora();
+    string preferenciaMenu = reserva.getPreferenciaMenu();
+
+    reserva.setNumReserva(contador);
+    reserva.setNombreCliente(nombreCliente);
+    reserva.setSituacion(situacion);
+    reserva.setNumPersonas(numPersonas);
+    reserva.setHora(hora);
+    reserva.setPreferenciaMenu(preferenciaMenu);
+    contador++;
+    return reserva;
 }
 
+
+Lista lista;
 int main(){
-    Lista lista;
-    for (int i=0;i<10;i++)
-    {
+    for (int i=0;i<10;i++){
         Reserva2 reserva=generarReservaAle();
-        lista.insertarNodo(reserva,'p');
+        lista.insertarNodo(reserva,'f',lista);
+        cout<<endl;
     }
-    
-    return 0;
+    cout<<endl<<"Comprobamos que se ha insertado correctamente: "<<endl;
+    lista.mostrarLista(lista);
 }
