@@ -64,6 +64,19 @@ Reserva2 generarReservaAle()
     contador++;
     return reserva;
 }
+
+Pedido generarPedido(Reserva2 reserva)
+{
+    Pedido pedido;
+    pedido.setNumPedido(reserva.getNumReserva());
+    pedido.setNombreCliente(reserva.getNombreCliente());
+    pedido.setSituacion(reserva.getSituacion());
+    pedido.setNumPersonas(reserva.getNumPersonas());
+    pedido.setHora(reserva.getHora());
+    pedido.setPreferenciaMenu(reserva.getPreferenciaMenu());
+    return pedido;
+}
+
 Lista lista;
 void cantidad_de_reservas()
 {
@@ -78,6 +91,13 @@ void cantidad_de_reservas()
         cout << endl;
         cout << endl;
     }
+}
+
+Lista pedidos;
+void gestionarPedido(Reserva2 reserva)
+{
+    Pedido pedido = generarPedido(reserva);
+    pedidos.insertarNodoPedido(pedido, 'f', pedidos);
 }
 
 int main()
