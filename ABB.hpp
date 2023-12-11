@@ -9,17 +9,14 @@ class NodoABB
 {
 public:
     NodoABB();
-    NodoABB(Mesa valor, int n_mesa, int capacidad, string localizacion, NodoABB *izq = NULL, NodoABB *der = NULL);
+    NodoABB(Mesas valor, NodoABB *izq = NULL, NodoABB *der = NULL);
     virtual ~NodoABB();
     void toString();
 
 protected:
 private:
     friend class ABB;
-    Mesa valor;
-    int n_mesa;
-    int capacidad;
-    string localizacion;
+    Mesas valor;
     NodoABB *hi, *hd;
 };
 
@@ -28,21 +25,15 @@ class ABB
 public:
     ABB();
     ABB(NodoABB *r);
-    ABB(Mesa valor, int n_mesa, int capacidad, string localizacion, NodoABB *hIz = NULL, NodoABB *hDer = NULL);
+    ABB(Mesas valor, NodoABB *hIz = NULL, NodoABB *hDer = NULL);
     virtual ~ABB();
-    void insertar(Mesa mesa);
+    void insertar(Mesas mesa, ABB &arbol);
     void verInOrden();
     void verInOrden_nMesa(NodoABB *nodo, int n_mesa);
     void verInOrden_nMesa(int n_mesa);
-    void insertar(Mesa nombre, int n_mesa, int capacidad, string localizacion);
-    void verInOrden_Mesa(int n_mesa);
-
-protected:
+    void insertarMesas(Mesas mesa, ABB &arbol);
 private:
     NodoABB *raiz;
-    void verInOrden(NodoABB *arb);
-    void verInOrden_Mesa(int n_mesa);
-    void insertar(Mesa nombre, int n_mesa, int capacidad, string localizacion);
 };
 
 #endif // ABB_H

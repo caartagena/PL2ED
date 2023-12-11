@@ -11,18 +11,20 @@ private:
     int numMesa;
     int numPersonas;
     string situacion;
+    bool ocupada;
     Pedido *ultimo;
     Pedido *primero;
 
 public:
     Mesas();
-    Mesas(int numMesa, int numPersonas, string situacion);
+    Mesas(int numMesa, int numPersonas, string situacion, bool ocupada, Pedido *ultimo, Pedido *primero);
     ~Mesas();
     void mostrarDatos() const
     {
         cout << "numMesa: " << numMesa << endl;
         cout << "numPersonas: " << numPersonas << endl;
         cout << "situacion: " << situacion << endl;
+        cout << "ocupada: " << ocupada << endl;
         cout << endl;
     }
     int getNumMesa();
@@ -30,11 +32,13 @@ public:
     string getSituacion();
     Pedido *getUltimo();
     Pedido *getPrimero();
+    bool getOcupada();
     void setNumMesa(int);
     void setNumPersonas(int);
     void setSituacion(string);
     void setUltimo(Pedido *);
     void setPrimero(Pedido *);
+    void setOcupada(bool);
 };
 
 int Mesas::getNumMesa()
@@ -48,6 +52,10 @@ int Mesas::getNumPersonas()
 string Mesas::getSituacion()
 {
     return this->situacion;
+}
+bool Mesas::getOcupada()
+{
+    return this->ocupada;
 }
 void Mesas::setNumMesa(int numMesa)
 {
@@ -76,6 +84,10 @@ void Mesas::setUltimo(Pedido *ultimo)
 void Mesas::setPrimero(Pedido *primero)
 {
     this->primero = primero;
+}
+void Mesas::setOcupada(bool ocupada)
+{
+    this->ocupada = ocupada;
 }
 
 #endif // Mesas_HPP

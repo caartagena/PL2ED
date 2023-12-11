@@ -1,6 +1,8 @@
 #include "reserva2.hpp"
 #include "LDEM.hpp"
 #include "LE.hpp"
+#include "mesas.hpp"
+#include "ABB.hpp"
 #include <iostream>
 #include <string>
 #include <random>
@@ -14,7 +16,7 @@ int generarNumeroAleatorio(int min, int max)
     uniform_int_distribution<int> distribucion(min, max);
     return distribucion(generador);
 }
-
+// Generar reservas aleatorias
 Reserva2::Reserva2() {}
 
 Reserva2::~Reserva2() {}
@@ -38,11 +40,10 @@ int generarNumPersonas()
 }
 string generarHora()
 {
-    string vhoras[4] = {
+    string vhoras[3] = {
         "13:00",
         "14:00",
-        "15:00",
-    };
+        "15:00"};
     string hora = vhoras[generarNumeroAleatorio(0, 3)];
     return hora;
 }
@@ -51,6 +52,25 @@ string generarPreferenciaMenu()
     string vpreferenciaMenu[3] = {"Vegano", "Sin_Gluten", "Completo"};
     string preferenciaMenu = vpreferenciaMenu[generarNumeroAleatorio(0, 2)];
     return preferenciaMenu;
+}
+// Generar mesas aleatorias
+int numMesa = 1;
+int generarNumMesa()
+{
+    return numMesa;
+    numMesa++;
+}
+int generarCapacidad()
+{
+    int capacidades[2] = {4, 8};
+    int capacidad = generarNumeroAleatorio(1, 2);
+    return capacidades[capacidad];
+}
+string generarLocalizacion()
+{
+    string localizaciones[2] = {"Terraza", "Interior"};
+    int localizacion = generarNumeroAleatorio(1, 2);
+    return localizaciones[localizacion];
 }
 
 Reserva2 generarReservaAle()
@@ -78,8 +98,19 @@ Pedido generarPedido(Reserva2 reserva)
     return pedido;
 }
 
+Mesas generarMesaAle()
+{
+    Mesas mesa;
+    mesa.setNumMesa(generarNumMesa());
+    mesa.setNumPersonas(generarCapacidad());
+    mesa.setSituacion(generarLocalizacion());
+    return mesa;
+}
+
 Lista lista;
 LE listaEnlazada;
+ABB arbol;
+
 void cantidad_de_reservas()
 {
     int cantidad;
@@ -91,6 +122,19 @@ void cantidad_de_reservas()
         Reserva2 reserva = generarReservaAle();
         lista.insertarNodo(reserva, 'f', lista);
         cout << endl;
+        cout << endl;
+    }
+}
+
+void insertarMesas()
+{
+    for (int i = 0; i < 20; i++)
+    {
+        Mesas mesa = generarMesaAle();
+        arbol.insertar(mesa, arbol);
+        cout << mesa.getNumMesa() << endl;
+        cout << mesa.getNumPersonas() << endl;
+        cout << mesa.getSituacion() << endl;
         cout << endl;
     }
 }
@@ -118,6 +162,7 @@ int main()
         switch (entrada)
         {
         case 0:
+            insertarMesas();
             break;
         case 1:
             break;

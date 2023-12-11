@@ -50,52 +50,6 @@ void Lista::insertarNodo(Reserva2 v, char c, Lista &lista)
     }
 }
 
-void Lista::borrarNodo(Reserva2 v, char c, Lista &lista)
-{
-    char tipoBorrado;
-    tipoBorrado = c;
-
-    if (tipoBorrado == 'f')
-    { // Eliminaci�n por el final
-        pnodo aux = NULL;
-        if (cabeza == fin)
-        { // S�lo hay elemento
-            aux = fin;
-            cabeza = fin = NULL;
-            aux = NULL;
-            delete aux;
-        }
-        else
-        {
-            aux = fin;
-            fin = fin->anterior;
-            aux->anterior = NULL; // a�ado yo seg�n transparencias
-            fin->siguiente = NULL;
-            delete aux;
-        }
-    }
-    else if (tipoBorrado == 'p')
-    { // Eliminaci�n por el Principio
-        pnodo aux = NULL;
-        if (cabeza == fin)
-        { // S�lo hay elemento
-            aux = cabeza;
-            cabeza = fin = NULL;
-            aux = NULL;
-            delete aux;
-        }
-        else
-        {
-            aux = cabeza;
-            cabeza = cabeza->siguiente;
-            aux->siguiente = NULL; // a�ado yo seg�n transparencias
-            cabeza->anterior = NULL;
-            delete aux;
-        }
-    }
-    cout << "Nodo borrado" << endl;
-}
-
 void Lista::borrarListaEntera(Lista &lista)
 {
     pnodo aux;

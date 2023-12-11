@@ -25,31 +25,28 @@ public:
         anterior = ant;
     }
 };
-class NodoPedido
+
+typedef NodoReserva *pnodo;
+
+class Lista
 {
+private:
+    pnodo cabeza, fin, actual;
 
-    typedef NodoReserva *pnodo;
-
-    class Lista
-    {
-    private:
-        pnodo cabeza, fin, actual;
-
-    public:
-        Lista() { cabeza = actual = fin = NULL; }
-        void insertarNodo(Reserva2 v, char c, Lista &lista);
-        void insertarNodoIntAntes(Reserva2 v, int posicion);
-        void borrarNodo(Reserva2 v, char c, Lista &lista);
-        void borrarNodoPedido(Pedido p, char c, Lista &lista);
-        void borrarListaEntera(Lista &lista);
-        void borrarNodoMenu(Lista &lista);
-        bool listaVacia(Lista &lista);
-        void mostrarLista(Lista &lista);
-        void esSiguiente();
-        void esAnterior();
-        void esPrimero();
-        void esUltimo();
-        bool esActual();
-    };
+public:
+    Lista() { cabeza = actual = fin = NULL; }
+    void insertarNodo(Reserva2 v, char c, Lista &lista);
+    void insertarNodoIntAntes(Reserva2 v, int posicion);
+    void borrarNodo(Reserva2 v, char c, Lista &lista);
+    void borrarListaEntera(Lista &lista);
+    void borrarNodoMenu(Lista &lista);
+    bool listaVacia(Lista &lista);
+    void mostrarLista(Lista &lista);
+    void esSiguiente();
+    void esAnterior();
+    void esPrimero();
+    void esUltimo();
+    bool esActual();
+};
 
 #endif // LDE_HPP
