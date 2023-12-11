@@ -1,5 +1,6 @@
 #include "reserva2.hpp"
 #include "LDEM.hpp"
+#include "LE.hpp"
 #include <iostream>
 #include <string>
 #include <random>
@@ -78,6 +79,7 @@ Pedido generarPedido(Reserva2 reserva)
 }
 
 Lista lista;
+LE listaEnlazada;
 void cantidad_de_reservas()
 {
     int cantidad;
@@ -91,13 +93,6 @@ void cantidad_de_reservas()
         cout << endl;
         cout << endl;
     }
-}
-
-Lista pedidos;
-void gestionarPedido(Reserva2 reserva)
-{
-    Pedido pedido = generarPedido(reserva);
-    pedidos.insertarNodoPedido(pedido, 'f', pedidos);
 }
 
 int main()

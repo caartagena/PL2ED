@@ -27,47 +27,29 @@ public:
 };
 class NodoPedido
 {
-private:
-    Pedido valor;
-    NodoPedido *siguiente;
-    NodoPedido *anterior;
 
-    friend class Lista;
+    typedef NodoReserva *pnodo;
 
-public:
-    NodoPedido(Pedido p, NodoPedido *sig = NULL, NodoPedido *ant = NULL)
+    class Lista
     {
-        valor = p;
-        siguiente = sig;
-        anterior = ant;
-    }
-};
-typedef NodoReserva *pnodo;
-typedef NodoPedido *pnodo2;
+    private:
+        pnodo cabeza, fin, actual;
 
-class Lista
-{
-private:
-    pnodo cabeza, fin, actual;
-    pnodo2 cabeza2, fin2, actual2;
-
-public:
-    Lista() { cabeza = actual = fin = NULL; }
-    Lista() { cabeza2 = actual2 = fin2 = NULL; };
-    void insertarNodo(Reserva2 v, char c, Lista &lista);
-    void insertarNodoPedido(Pedido p, char c, Lista &lista);
-    void insertarNodoIntAntes(Reserva2 v, int posicion);
-    void borrarNodo(Reserva2 v, char c, Lista &lista);
-    void borrarNodoPedido(Pedido p, char c, Lista &lista);
-    void borrarListaEntera(Lista &lista);
-    void borrarNodoMenu(Lista &lista);
-    bool listaVacia(Lista &lista);
-    void mostrarLista(Lista &lista);
-    void esSiguiente();
-    void esAnterior();
-    void esPrimero();
-    void esUltimo();
-    bool esActual();
-};
+    public:
+        Lista() { cabeza = actual = fin = NULL; }
+        void insertarNodo(Reserva2 v, char c, Lista &lista);
+        void insertarNodoIntAntes(Reserva2 v, int posicion);
+        void borrarNodo(Reserva2 v, char c, Lista &lista);
+        void borrarNodoPedido(Pedido p, char c, Lista &lista);
+        void borrarListaEntera(Lista &lista);
+        void borrarNodoMenu(Lista &lista);
+        bool listaVacia(Lista &lista);
+        void mostrarLista(Lista &lista);
+        void esSiguiente();
+        void esAnterior();
+        void esPrimero();
+        void esUltimo();
+        bool esActual();
+    };
 
 #endif // LDE_HPP

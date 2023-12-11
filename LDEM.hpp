@@ -5,7 +5,7 @@ using namespace std;
 
 void Lista::insertarNodo(Reserva2 v, char c, Lista &lista)
 {
-    NodoReserva *nuevo;
+    pnodo nuevo;
     nuevo = new NodoReserva(v);
     char tipoInsercion;
     tipoInsercion = c;
@@ -49,52 +49,7 @@ void Lista::insertarNodo(Reserva2 v, char c, Lista &lista)
         cout << "Error en el tipo de inserción" << endl;
     }
 }
-void Lista::insertarNodoPedido(Pedido p, char c, Lista &lista)
-{
-    pnodo2 nuevo;
-    nuevo = new NodoPedido(p);
-    char tipoInsercion;
-    tipoInsercion = c;
 
-    if (tipoInsercion == 'p')
-    { // Inserción por el Principio
-        if (lista.cabeza == NULL)
-        {
-            lista.cabeza2 = nuevo;
-            lista.fin2 = nuevo;
-            nuevo->siguiente = NULL;
-            nuevo->anterior = NULL;
-        }
-        else
-        {
-            nuevo->siguiente = lista.cabeza2;
-            lista.cabeza2->anterior = nuevo;
-            nuevo->anterior = NULL;
-            lista.cabeza2 = nuevo;
-        }
-    }
-    else if (tipoInsercion == 'f')
-    { // Inserción por el Final
-        if (lista.cabeza == NULL)
-        {
-            lista.cabeza2 = nuevo;
-            lista.fin2 = nuevo;
-            nuevo->siguiente = NULL;
-            nuevo->anterior = NULL;
-        }
-        else
-        {
-            lista.fin2->siguiente = nuevo;
-            nuevo->siguiente = NULL;
-            nuevo->anterior = lista.fin2;
-            lista.fin2 = nuevo;
-        }
-    }
-    else
-    {
-        cout << "Error en el tipo de inserción" << endl;
-    }
-}
 void Lista::borrarNodo(Reserva2 v, char c, Lista &lista)
 {
     char tipoBorrado;
