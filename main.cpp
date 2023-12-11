@@ -20,6 +20,15 @@ int generarNumeroAleatorio(int min, int max)
 Reserva2::Reserva2() {}
 
 Reserva2::~Reserva2() {}
+
+Pedido::Pedido() {}
+
+Pedido::~Pedido() {}
+
+Mesas::Mesas() {}
+
+Mesas::~Mesas() {}
+
 int contador = 1;
 string generarNombreCliente()
 {
@@ -54,6 +63,7 @@ string generarPreferenciaMenu()
     return preferenciaMenu;
 }
 // Generar mesas aleatorias
+
 int numMesa = 1;
 int generarNumMesa()
 {
@@ -131,7 +141,7 @@ void insertarMesas()
     for (int i = 0; i < 20; i++)
     {
         Mesas mesa = generarMesaAle();
-        arbol.insertar(mesa, arbol);
+        arbol.insertarMesasOrdenadas(mesa, arbol);
         cout << mesa.getNumMesa() << endl;
         cout << mesa.getNumPersonas() << endl;
         cout << mesa.getSituacion() << endl;

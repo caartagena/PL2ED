@@ -21,8 +21,6 @@ ABB::~ABB()
     // dtor
 }
 
-
-
 void ABB::verInOrden_nMesa(NodoABB *arb, int n_mesa) // Ver ABB en inorden
 {
     if (arb)
@@ -36,8 +34,7 @@ void ABB::verInOrden_nMesa(NodoABB *arb, int n_mesa) // Ver ABB en inorden
     }
 }
 
-
-void ABB::insertar(Mesas mesa, ABB &arbol)
+void ABB::insertarMesasOrdenadas(Mesas mesa, ABB &arbol)
 {
     NodoABB *nuevo;
     nuevo = new NodoABB(mesa);

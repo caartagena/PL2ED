@@ -1,6 +1,6 @@
 #ifndef LE_H
 #define LE_H
-#include "Pedidos.hpp"
+#include "pedidos.hpp"
 #include <iostream>
 using namespace std;
 
@@ -24,7 +24,6 @@ public:
         ultimo = NULL;
         longitud = 0;
     };
-    virtual ~LE();
     int get_longitud();
     void insertar_derecha(Pedido elemento);
     void insertar_izquierda(Pedido elemento);
