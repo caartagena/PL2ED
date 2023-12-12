@@ -2,7 +2,7 @@
 #include "LDEM.hpp"
 #include "LE.hpp"
 #include "mesas.hpp"
-#include "ABB.hpp"
+#include "ABBM.hpp"
 #include <iostream>
 #include <string>
 #include <random>
@@ -64,22 +64,22 @@ string generarPreferenciaMenu()
 }
 // Generar mesas aleatorias
 
-int numMesa = 1;
+int numMesa = 0;
 int generarNumMesa()
 {
-    return numMesa;
     numMesa++;
+    return numMesa;
 }
 int generarCapacidad()
 {
     int capacidades[2] = {4, 8};
-    int capacidad = generarNumeroAleatorio(1, 2);
+    int capacidad = generarNumeroAleatorio(0, 1);
     return capacidades[capacidad];
 }
 string generarLocalizacion()
 {
     string localizaciones[2] = {"Terraza", "Interior"};
-    int localizacion = generarNumeroAleatorio(1, 2);
+    int localizacion = generarNumeroAleatorio(0, 1);
     return localizaciones[localizacion];
 }
 
@@ -114,12 +114,15 @@ Mesas generarMesaAle()
     mesa.setNumMesa(generarNumMesa());
     mesa.setNumPersonas(generarCapacidad());
     mesa.setSituacion(generarLocalizacion());
+    mesa.setOcupada(false);
+    cout << "Mesa generada" << endl;
+    cout << endl;
     return mesa;
 }
 
 Lista lista;
 LE listaEnlazada;
-ABB arbol;
+ArbolABB arbol;
 
 void cantidad_de_reservas()
 {
@@ -142,15 +145,49 @@ void insertarMesas()
     {
         Mesas mesa = generarMesaAle();
         arbol.insertarMesasOrdenadas(mesa, arbol);
-        cout << mesa.getNumMesa() << endl;
-        cout << mesa.getNumPersonas() << endl;
-        cout << mesa.getSituacion() << endl;
-        cout << endl;
     }
+}
+
+void generarMesaPorConsola()
+{
+    Mesas mesa;
+    int numPersonas;
+    string situacion;
+    cout << "Introduzca el numero de personas de la mesa: " << endl;
+    cin >> numPersonas;
+    cout << "Introduzca la localizacion: " << endl;
+    cin >> situacion;
+    mesa.setNumMesa(generarNumMesa());
+    mesa.setNumPersonas(numPersonas);
+    mesa.setSituacion(situacion);
+    mesa.setOcupada(false);
+    arbol.insertarMesasOrdenadas(mesa, arbol);
+}
+
+void eliminarMesaPorConsla()
+{
+    int numMesa;
+    // int numPersonas;
+    // string situacion;
+    cout << "Introduzca el numero de mesa que desea eliminar: (0 para eliminar por numero de personas y situacion): ";
+    cin >> numMesa;
+    /*if (numMesa == 0)
+    {
+        cout << "Introduzca el numero de personas que desea eliminar: ";
+        cin >> numPersonas;
+        cout << "Introduzca la situacion que desea eliminar: ";
+        cin >> situacion;
+        arbol.eliminarMesaNR(0, numPersonas, situacion, arbol);
+    }
+    else
+    {*/
+    arbol.eliminarMesaNR(numMesa, 0, "A", arbol);
+    //}
 }
 
 int main()
 {
+    insertarMesas();
     int entrada = -1;
     while (entrada != 0)
     {
@@ -172,13 +209,15 @@ int main()
         switch (entrada)
         {
         case 0:
-            insertarMesas();
             break;
         case 1:
+            arbol.mostrarMesasInOrder(arbol.getRaiz());
             break;
         case 2:
+            eliminarMesaPorConsla();
             break;
         case 3:
+            generarMesaPorConsola();
             break;
         case 4:
             cantidad_de_reservas();
