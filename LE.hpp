@@ -7,7 +7,11 @@ using namespace std;
 class NodoLista
 {
 public:
-    NodoLista(Pedido e, NodoLista *sig = NULL);
+    NodoLista(Pedido e, NodoLista *sig = NULL)
+    {
+        this->elemento = e;
+        this->siguiente = sig;
+    };
 
 private:
     friend class LE;
@@ -25,10 +29,29 @@ public:
         longitud = 0;
     };
     int get_longitud();
-    void insertar_derecha(Pedido elemento);
+    void insertar_derecha(Pedido elemento)
+    {
+        NodoLista *nuevo_nodo = new NodoLista(elemento);
+
+        if (es_vacia())
+        {
+            primero = nuevo_nodo;
+            ultimo = nuevo_nodo;
+            longitud++;
+        }
+        else
+        {
+            ultimo->siguiente = nuevo_nodo;
+            ultimo = nuevo_nodo;
+            longitud++;
+        }
+    };
     void insertar_izquierda(Pedido elemento);
     void insertar_enPosicion(int indice, Pedido elemento);
-    bool es_vacia();
+    bool es_vacia()
+    {
+        return ((primero == NULL) && (ultimo == NULL));
+    }
     Pedido ver_primero();
     Pedido ver_ultimo();
     Pedido ver_posicion(int indice);

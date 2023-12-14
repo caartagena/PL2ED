@@ -13,13 +13,13 @@ private:
     string nombreCliente;
     string situacion;
     int numPersonas;
-    string hora;
+    int hora;
     string preferenciaMenu;
     int numMesa;
 
 public:
     Pedido();
-    Pedido(int numPedido, string nombreCliente, string situacion, int numPersonas, string hora, string preferenciaMenu, int numMesa);
+    Pedido(int numPedido, string nombreCliente, string situacion, int numPersonas, int hora, string preferenciaMenu, int numMesa);
     ~Pedido();
     void mostrarDatos() const
     {
@@ -36,14 +36,14 @@ public:
     string getNombreCliente();
     string getSituacion();
     int getNumPersonas();
-    string getHora();
+    int getHora();
     string getPreferenciaMenu();
     int getNumMesa();
     void setNumPedido(int);
     void setNombreCliente(string);
     void setSituacion(string);
     void setNumPersonas(int);
-    void setHora(string);
+    void setHora(int);
     void setPreferenciaMenu(string);
     void setNumMesa(int);
 };
@@ -64,7 +64,7 @@ int Pedido::getNumPersonas()
 {
     return this->numPersonas;
 }
-string Pedido::getHora()
+int Pedido::getHora()
 {
     return this->hora;
 }
@@ -92,7 +92,7 @@ void Pedido::setNumPersonas(int numPersonas)
 {
     this->numPersonas = numPersonas;
 }
-void Pedido::setHora(string hora)
+void Pedido::setHora(int hora)
 {
     this->hora = hora;
 }

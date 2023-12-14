@@ -3,50 +3,50 @@
 #include <iostream>
 using namespace std;
 
-void Lista::insertarNodo(Reserva2 v, char c, Lista &lista)
+void Lista::insertarNodo(Reserva2 v, Lista &lista)
 {
     pnodo nuevo;
     nuevo = new NodoReserva(v);
-    char tipoInsercion;
-    tipoInsercion = c;
 
-    if (tipoInsercion == 'p')
-    { // Inserción por el Principio
-        if (lista.cabeza == NULL)
-        {
-            lista.cabeza = nuevo;
-            lista.fin = nuevo;
-            nuevo->siguiente = NULL;
-            nuevo->anterior = NULL;
-        }
-        else
-        {
-            nuevo->siguiente = lista.cabeza;
-            lista.cabeza->anterior = nuevo;
-            nuevo->anterior = NULL;
-            lista.cabeza = nuevo;
-        }
-    }
-    else if (tipoInsercion == 'f')
-    { // Inserción por el Final
-        if (lista.cabeza == NULL)
-        {
-            lista.cabeza = nuevo;
-            lista.fin = nuevo;
-            nuevo->siguiente = NULL;
-            nuevo->anterior = NULL;
-        }
-        else
-        {
-            lista.fin->siguiente = nuevo;
-            nuevo->siguiente = NULL;
-            nuevo->anterior = lista.fin;
-            lista.fin = nuevo;
-        }
+    if (lista.cabeza == NULL)
+    {
+        lista.cabeza = nuevo;
+        lista.fin = nuevo;
+        nuevo->siguiente = NULL;
+        nuevo->anterior = NULL;
     }
     else
     {
-        cout << "Error en el tipo de inserción" << endl;
+        pnodo actual = lista.cabeza;
+        while (actual != NULL)
+        {
+            // Compara la reserva actual con la nueva reserva
+            if (actual->valor.getHora() > nuevo->valor.getHora() ||
+                (actual->valor.getHora() == nuevo->valor.getHora() && actual->valor.getSituacion() > nuevo->valor.getSituacion()) ||
+                (actual->valor.getHora() == nuevo->valor.getHora() && actual->valor.getSituacion() == nuevo->valor.getSituacion() && actual->valor.getNumPersonas() > nuevo->valor.getNumPersonas()))
+            {
+                // Inserta el nuevo nodo antes del nodo actual
+                nuevo->siguiente = actual;
+                nuevo->anterior = actual->anterior;
+                if (actual->anterior != NULL)
+                {
+                    actual->anterior->siguiente = nuevo;
+                }
+                else
+                {
+                    // Si el nodo actual es la cabeza de la lista, actualiza la cabeza
+                    lista.cabeza = nuevo;
+                }
+                actual->anterior = nuevo;
+                return;
+            }
+            actual = actual->siguiente;
+        }
+        // Si llegamos al final de la lista sin encontrar un lugar para insertar, inserta al final
+        lista.fin->siguiente = nuevo;
+        nuevo->anterior = lista.fin;
+        lista.fin = nuevo;
+        nuevo->siguiente = NULL;
     }
 }
 
@@ -151,4 +151,47 @@ void Lista::esUltimo()
 bool Lista::esActual()
 {
     return actual != NULL;
+}
+
+Reserva2 Lista::buscarHora(int turno, Lista &lista)
+{
+    pnodo aux, prev = NULL;
+    aux = lista.cabeza;
+    while (aux != NULL)
+    {
+        if (aux->valor.getHora() == turno)
+        {
+            if (prev == NULL)
+            {
+                lista.cabeza = aux->siguiente;
+            }
+            else
+            {
+                prev->siguiente = aux->siguiente;
+            }
+
+            Reserva2 reservaAtendida = aux->valor;
+            delete aux;
+            return reservaAtendida;
+        }
+        prev = aux;
+        aux = aux->siguiente;
+    }
+    return Reserva2();
+}
+
+int Lista::ContarHora(int hora, Lista &lista)
+{
+    pnodo aux;
+    aux = lista.cabeza;
+    int contador = 0;
+    while (aux != NULL)
+    {
+        if (aux->valor.getHora() == hora)
+        {
+            contador++;
+        }
+        aux = aux->siguiente;
+    }
+    return contador;
 }

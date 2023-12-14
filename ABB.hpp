@@ -1,6 +1,7 @@
 #ifndef ABB_HPP
 #define ABB_HPP
 #include "mesas.hpp"
+#include "LE.hpp"
 #include <iostream>
 #include <string>
 #include <iostream>
@@ -36,6 +37,63 @@ public:
     void eliminarMesaNR(int numMesa, int numPersonas, string situacion, ArbolABB &arbol);
     bool Vacio(Nodo *r) { return r == nullptr; }
     Nodo *getRaiz() { return raiz; }
+    void inicializarMesas(Nodo *nodo)
+    {
+        if (nodo == nullptr)
+        {
+            return;
+        }
+
+        nodo->dato.setOcupada(false);
+
+        inicializarMesas(nodo->izquierdo);
+        inicializarMesas(nodo->derecho);
+    }
+    bool esMesaAdecuada(Reserva2 &reserva, Mesas &mesa)
+    {
+        if (mesa.getOcupada() == true)
+        {
+            return false;
+        }
+
+        if (reserva.getNumPersonas() > mesa.getNumMesa())
+        {
+            return false;
+        }
+
+        if (reserva.getSituacion() != mesa.getSituacion())
+        {
+            return false;
+        }
+
+        return true;
+    }
+    bool buscarMesaAdecuada(Nodo *nodo, Reserva2 &reserva, Pedido &pedido)
+    {
+        if (nodo == nullptr)
+        {
+            return false;
+        }
+
+        if (esMesaAdecuada(reserva, nodo->dato))
+        {
+            nodo->dato.setOcupada(true);
+            nodo->dato.insertarPedido(pedido);
+            return true;
+        }
+
+        if (buscarMesaAdecuada(nodo->izquierdo, reserva, pedido))
+        {
+            return true;
+        }
+
+        if (buscarMesaAdecuada(nodo->derecho, reserva, pedido))
+        {
+            return true;
+        }
+
+        return false;
+    }
 
 private:
     // Funciones auxiliares

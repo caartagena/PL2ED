@@ -35,7 +35,8 @@ private:
 
 public:
     Lista() { cabeza = actual = fin = NULL; }
-    void insertarNodo(Reserva2 v, char c, Lista &lista);
+    void insertarNodo(Reserva2 v, Lista &lista);
+    void insertarNodoOrdenado(Reserva2 v, char c, Lista &lista);
     void insertarNodoIntAntes(Reserva2 v, int posicion);
     void borrarNodo(Reserva2 v, char c, Lista &lista);
     void borrarListaEntera(Lista &lista);
@@ -47,6 +48,12 @@ public:
     void esPrimero();
     void esUltimo();
     bool esActual();
+    NodoReserva *getCabeza()
+    {
+        return cabeza;
+    }
+    int ContarHora(int hora, Lista &lista);
+    Reserva2 buscarHora(int turno, Lista &lista);
 };
 
 #endif // LDE_HPP

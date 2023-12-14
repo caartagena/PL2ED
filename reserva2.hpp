@@ -12,14 +12,14 @@ private:
     string nombreCliente;
     string situacion;
     int numPersonas;
-    string hora;
+    int hora;
     string preferenciaMenu;
     Reserva2 *siguiente;
     Reserva2 *anterior;
 
 public:
     Reserva2();
-    Reserva2(int numReserva, string nombreCliente, string situacion, int numPersonas, string hora, string preferenciaMenu);
+    Reserva2(int numReserva, string nombreCliente, string situacion, int numPersonas, int hora, string preferenciaMenu);
     ~Reserva2();
     void mostrarDatos() const
     {
@@ -35,15 +35,16 @@ public:
     string getNombreCliente();
     string getSituacion();
     int getNumPersonas();
-    string getHora();
+    int getHora();
     string getPreferenciaMenu();
     void setNumReserva(int);
     void setNombreCliente(string);
     void setSituacion(string);
     void setNumPersonas(int);
-    void setHora(string);
+    void setHora(int);
     void setPreferenciaMenu(string);
 };
+
 int Reserva2::getNumReserva()
 {
     return this->numReserva;
@@ -62,7 +63,7 @@ int Reserva2::getNumPersonas()
     return this->numPersonas;
 }
 
-string Reserva2::getHora()
+int Reserva2::getHora()
 {
     return this->hora;
 }
@@ -91,7 +92,7 @@ void Reserva2::setNumPersonas(int numPersonas)
     this->numPersonas = numPersonas;
     cout << "numPersonas: " << numPersonas << endl;
 }
-void Reserva2::setHora(string hora)
+void Reserva2::setHora(int hora)
 {
     this->hora = hora;
     cout << "hora: " << hora << endl;

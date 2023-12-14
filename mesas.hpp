@@ -12,12 +12,13 @@ private:
     int numPersonas;
     string situacion;
     bool ocupada;
-    Pedido *ultimo;
     Pedido *primero;
+    Pedido *ultimo;
+    LE pedidosServidos;
 
 public:
     Mesas();
-    Mesas(int numMesa, int numPersonas, string situacion, bool ocupada, Pedido *ultimo, Pedido *primero);
+    Mesas(int numMesa, int numPersonas, string situacion, bool ocupada, Pedido *primero, Pedido *ultimo, LE pedidosServidos);
     ~Mesas();
     void mostrarDatos() const
     {
@@ -26,6 +27,15 @@ public:
         cout << "situacion: " << situacion << endl;
         cout << "ocupada: " << ocupada << endl;
         cout << endl;
+    }
+    void insertarPedido(Pedido pedido)
+    {
+        pedidosServidos.insertar_derecha(pedido);
+        cout << "Pedido insertado" << endl;
+    }
+    void mostrarPedidos()
+    {
+        pedidosServidos.mostrar(pedidosServidos);
     }
     int getNumMesa();
     int getNumPersonas();

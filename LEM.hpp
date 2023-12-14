@@ -39,23 +39,6 @@ void LE::insertar_izquierda(Pedido elemento)
 	}
 }
 
-void LE::insertar_derecha(Pedido elemento)
-{
-	NodoLista *nuevo_nodo = new NodoLista(elemento);
-
-	if (es_vacia())
-	{
-		primero = nuevo_nodo;
-		ultimo = nuevo_nodo;
-		longitud++;
-	}
-	else
-	{
-		ultimo->siguiente = nuevo_nodo;
-		ultimo = nuevo_nodo;
-		longitud++;
-	}
-}
 void LE::insertar_enPosicion(int posicion, Pedido elemento)
 {
 	if ((posicion >= 1) && (posicion <= (longitud + 1)))

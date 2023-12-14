@@ -47,13 +47,9 @@ int generarNumPersonas()
     int numPersonas = generarNumeroAleatorio(1, 8);
     return numPersonas;
 }
-string generarHora()
+int generarHora()
 {
-    string vhoras[3] = {
-        "13:00",
-        "14:00",
-        "15:00"};
-    string hora = vhoras[generarNumeroAleatorio(0, 3)];
+    int hora = generarNumeroAleatorio(13, 15);
     return hora;
 }
 string generarPreferenciaMenu()
@@ -133,7 +129,7 @@ void cantidad_de_reservas()
     for (int i = 0; i < cantidad; i++)
     {
         Reserva2 reserva = generarReservaAle();
-        lista.insertarNodo(reserva, 'f', lista);
+        lista.insertarNodo(reserva, lista);
         cout << endl;
         cout << endl;
     }
@@ -185,6 +181,23 @@ void eliminarMesaPorConsla()
     //}
 }
 
+void atenderReservasTurno()
+{
+    arbol.inicializarMesas(arbol.getRaiz());
+    int turno;
+    cout << "Introduzca el turno que desea atender: ";
+    cin >> turno;
+    int cuantos = lista.ContarHora(turno, lista);
+    for (int i = 0; i < cuantos; i++)
+    {
+        Reserva2 reserva;
+        reserva = lista.buscarHora(turno, lista);
+        cout << "Reservas atendida: " << reserva.getNumReserva() << endl;
+        Pedido pedido = generarPedido(reserva);
+        arbol.buscarMesaAdecuada(arbol.getRaiz(), reserva, pedido);
+    }
+}
+
 int main()
 {
     insertarMesas();
@@ -232,10 +245,10 @@ int main()
             lista.borrarNodoMenu(lista);
             break;
         case 8:
-
+            atenderReservasTurno();
             break;
         case 9:
-
+            lista.ContarHora(13, lista);
             break;
         case 10:
 
