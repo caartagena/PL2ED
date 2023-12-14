@@ -92,15 +92,17 @@ Reserva2 generarReservaAle()
     return reserva;
 }
 
+int contadorNumPedido = 1;
 Pedido generarPedido(Reserva2 reserva)
 {
     Pedido pedido;
-    pedido.setNumPedido(reserva.getNumReserva());
+    pedido.setNumPedido(contadorNumPedido);
     pedido.setNombreCliente(reserva.getNombreCliente());
     pedido.setSituacion(reserva.getSituacion());
     pedido.setNumPersonas(reserva.getNumPersonas());
     pedido.setHora(reserva.getHora());
     pedido.setPreferenciaMenu(reserva.getPreferenciaMenu());
+    contadorNumPedido++;
     return pedido;
 }
 
@@ -117,7 +119,6 @@ Mesas generarMesaAle()
 }
 
 Lista lista;
-LE listaEnlazada;
 ArbolABB arbol;
 
 void cantidad_de_reservas()
@@ -181,6 +182,37 @@ void eliminarMesaPorConsla()
     //}
 }
 
+bool ArbolABB::buscarMesaAdecuada(Nodo *nodo, Reserva2 &reserva, Pedido &pedido, Lista &lista)
+{
+    while (nodo != nullptr)
+    {
+        if (esMesaAdecuada(reserva, nodo->dato))
+        {
+            nodo->dato.setOcupada(true);
+            cout << "Mesa numero: " << nodo->dato.getNumMesa() << " ocupada" << endl;
+            nodo->dato.insertarPedido(pedido, nodo->dato.getPedidosServidos());
+            cout << endl;
+            return true;
+        }
+
+        if (nodo->izquierdo != nullptr && buscarMesaAdecuada(nodo->izquierdo, reserva, pedido, lista))
+        {
+            return true;
+        }
+
+        nodo = nodo->derecho;
+    }
+
+    cout << "Reserva modificada" << endl;
+    cout << "Numero de reserva: " << reserva.getNumReserva() << endl;
+    cout << "Hora: " << reserva.getHora() << endl;
+    cout << "Modificacion: La reserva se ha actualizado para las: " << reserva.getHora() + 1 << endl;
+    cout << endl;
+    reserva.setHora(reserva.getHora() + 1);
+    lista.insertarNodo(reserva, lista);
+    return false;
+}
+
 void atenderReservasTurno()
 {
     arbol.inicializarMesas(arbol.getRaiz());
@@ -192,10 +224,27 @@ void atenderReservasTurno()
     {
         Reserva2 reserva;
         reserva = lista.buscarHora(turno, lista);
+        cout << endl;
         cout << "Reservas atendida: " << reserva.getNumReserva() << endl;
         Pedido pedido = generarPedido(reserva);
-        arbol.buscarMesaAdecuada(arbol.getRaiz(), reserva, pedido);
+        arbol.buscarMesaAdecuada(arbol.getRaiz(), reserva, pedido, lista);
     }
+}
+
+void mostrarMesaYPedidos(ArbolABB &arbol)
+{
+    int numMesa;
+    cout << "Introduzca el numero de mesa que desea mostrar: ";
+    cin >> numMesa;
+    arbol.buscarYMostrarMesa(arbol.getRaiz(), numMesa);
+}
+
+void mostrarMesaYPedidosSituacion(ArbolABB &arbol)
+{
+    string situacion;
+    cout << "Introduzca la situacion que desea mostrar: ";
+    cin >> situacion;
+    arbol.buscarYMostrarMesaSituacion(arbol.getRaiz(), situacion);
 }
 
 int main()
@@ -248,10 +297,10 @@ int main()
             atenderReservasTurno();
             break;
         case 9:
-            lista.ContarHora(13, lista);
+            mostrarMesaYPedidos(arbol);
             break;
         case 10:
-
+            mostrarMesaYPedidosSituacion(arbol);
             break;
         default:
             break;

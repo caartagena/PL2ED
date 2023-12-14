@@ -1,6 +1,7 @@
 #ifndef Mesas_HPP
 #define Mesas_HPP
 #include "pedidos.hpp"
+#include "LE.hpp"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -12,8 +13,6 @@ private:
     int numPersonas;
     string situacion;
     bool ocupada;
-    Pedido *primero;
-    Pedido *ultimo;
     LE pedidosServidos;
 
 public:
@@ -26,12 +25,19 @@ public:
         cout << "numPersonas: " << numPersonas << endl;
         cout << "situacion: " << situacion << endl;
         cout << "ocupada: " << ocupada << endl;
+        cout << "Pedidos servidos: " << endl;
         cout << endl;
     }
-    void insertarPedido(Pedido pedido)
+    void insertarPedido(Pedido pedido, LE &pedidosServidos)
     {
-        pedidosServidos.insertar_derecha(pedido);
+        pedidosServidos.insertar_derecha(pedido, pedidosServidos);
         cout << "Pedido insertado" << endl;
+        cout << "Numero de pedido: " << pedido.getNumPedido() << endl;
+        cout << "Nombre de Cliente: " << pedido.getNombreCliente() << endl;
+        cout << "Numero de personas: " << pedido.getNumPersonas() << endl;
+        cout << "Hora: " << pedido.getHora() << endl;
+        cout << "Preferencia de menu: " << pedido.getPreferenciaMenu() << endl;
+        cout << endl;
     }
     void mostrarPedidos()
     {
@@ -49,6 +55,7 @@ public:
     void setUltimo(Pedido *);
     void setPrimero(Pedido *);
     void setOcupada(bool);
+    LE &getPedidosServidos();
 };
 
 int Mesas::getNumMesa()
@@ -79,25 +86,13 @@ void Mesas::setSituacion(string situacion)
 {
     this->situacion = situacion;
 }
-Pedido *Mesas::getUltimo()
-{
-    return this->ultimo;
-}
-Pedido *Mesas::getPrimero()
-{
-    return this->primero;
-}
-void Mesas::setUltimo(Pedido *ultimo)
-{
-    this->ultimo = ultimo;
-}
-void Mesas::setPrimero(Pedido *primero)
-{
-    this->primero = primero;
-}
 void Mesas::setOcupada(bool ocupada)
 {
     this->ocupada = ocupada;
 }
 
+LE &Mesas::getPedidosServidos()
+{
+    return this->pedidosServidos;
+}
 #endif // Mesas_HPP

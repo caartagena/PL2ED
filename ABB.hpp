@@ -1,6 +1,7 @@
 #ifndef ABB_HPP
 #define ABB_HPP
 #include "mesas.hpp"
+#include "LDE.hpp"
 #include "LE.hpp"
 #include <iostream>
 #include <string>
@@ -68,36 +69,67 @@ public:
 
         return true;
     }
-    bool buscarMesaAdecuada(Nodo *nodo, Reserva2 &reserva, Pedido &pedido)
+    bool buscarMesaAdecuada(Nodo *nodo, Reserva2 &reserva, Pedido &pedido, Lista &lista);
+    void buscarYMostrarMesa(Nodo *nodo, int numMesa)
     {
         if (nodo == nullptr)
         {
-            return false;
+            cout << "No se encontró la mesa con el número " << numMesa << endl;
+            return;
         }
 
-        if (esMesaAdecuada(reserva, nodo->dato))
+        if (nodo->dato.getNumMesa() == numMesa)
         {
-            nodo->dato.setOcupada(true);
-            nodo->dato.insertarPedido(pedido);
-            return true;
+            cout << "Mesa numero: " << nodo->dato.getNumMesa() << endl;
+            cout << "Capacidad de la mesa: " << nodo->dato.getNumPersonas() << endl;
+            cout << "Situacion de la mesa: " << nodo->dato.getSituacion() << endl;
+            cout << "Pedidos atendidos: " << endl;
+            nodo->dato.mostrarPedidos();
+            return;
         }
 
-        if (buscarMesaAdecuada(nodo->izquierdo, reserva, pedido))
+        if (nodo->dato.getNumMesa() < numMesa)
         {
-            return true;
+            buscarYMostrarMesa(nodo->derecho, numMesa);
         }
-
-        if (buscarMesaAdecuada(nodo->derecho, reserva, pedido))
+        else
         {
-            return true;
+            buscarYMostrarMesa(nodo->izquierdo, numMesa);
+        }
+    }
+    void buscarYMostrarMesaSituacion(Nodo *nodo, const string &situacion)
+    {
+        if (nodo == nullptr)
+        {
+            return;
         }
 
-        return false;
+        if (nodo->dato.getSituacion() == situacion)
+        {
+            cout << "Mesa numero: " << nodo->dato.getNumMesa() << endl;
+            cout << "Capacidad de la mesa: " << nodo->dato.getNumPersonas() << endl;
+            cout << "Situacion de la mesa: " << nodo->dato.getSituacion() << endl;
+            cout << "Pedidos atendidos: " << endl;
+            nodo->dato.mostrarPedidos();
+        }
+
+        buscarYMostrarMesaSituacion(nodo->derecho, situacion);
+        buscarYMostrarMesaSituacion(nodo->izquierdo, situacion);
+    }
+    int cantidadDeNodos(Nodo *nodo)
+    {
+        if (nodo == nullptr)
+        {
+            return 0;
+        }
+
+        return 1 + cantidadDeNodos(nodo->derecho) + cantidadDeNodos(nodo->izquierdo);
     }
 
 private:
     // Funciones auxiliares
-    void auxContador(Nodo *nodo);
+    void
+    auxContador(Nodo *nodo);
     void auxAltura(Nodo *nodo, int nivel);
 };
 
