@@ -142,7 +142,6 @@ void insertarMesas()
         arbol.insertarMesasOrdenadas(mesa, arbol);
     }
 }
-void a() {}
 void generarMesaPorConsola()
 {
     Mesas mesa;
