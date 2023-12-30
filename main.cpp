@@ -59,12 +59,10 @@ string generarPreferenciaMenu()
     return preferenciaMenu;
 }
 // Generar mesas aleatorias
-
-int numMesa = 0;
 int generarNumMesa()
 {
-    numMesa++;
-    return numMesa;
+    int numeroMesa = generarNumeroAleatorio(0, 100);
+    return numeroMesa;
 }
 int generarCapacidad()
 {
@@ -149,12 +147,15 @@ void generarMesaPorConsola()
 {
     Mesas mesa;
     int numPersonas;
+    int numeroMesa;
     string situacion;
+    cout << "Introduzca el numero de mesa: " << endl;
+    cin >> numeroMesa;
     cout << "Introduzca el numero de personas de la mesa: " << endl;
     cin >> numPersonas;
     cout << "Introduzca la localizacion: " << endl;
     cin >> situacion;
-    mesa.setNumMesa(generarNumMesa());
+    mesa.setNumMesa(numeroMesa);
     mesa.setNumPersonas(numPersonas);
     mesa.setSituacion(situacion);
     mesa.setOcupada(false);

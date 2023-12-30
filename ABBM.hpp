@@ -96,10 +96,10 @@ void ArbolABB::eliminarMesaNR(int numMesa, int numPersonas, string situacion, Ar
             }
         }
     }
-    // Si se ha encontrado el elemento, proceder a eliminar
+
     if (!Vacio(actual))
     {
-        // Caso 1: Nodo sin hijos
+
         if (actual->izquierdo == nullptr && actual->derecho == nullptr)
         {
             if (padre == nullptr)
@@ -116,7 +116,7 @@ void ArbolABB::eliminarMesaNR(int numMesa, int numPersonas, string situacion, Ar
             }
             delete actual;
         }
-        // Caso 2: Nodo con un solo hijo
+       
         else if (actual->izquierdo == nullptr || actual->derecho == nullptr)
         {
             Nodo *hijo = (actual->izquierdo != nullptr) ? actual->izquierdo : actual->derecho;
@@ -134,7 +134,7 @@ void ArbolABB::eliminarMesaNR(int numMesa, int numPersonas, string situacion, Ar
             }
             delete actual;
         }
-        // Caso 3: Nodo con dos hijos
+        
         else
         {
             Nodo *aux = actual->derecho;
