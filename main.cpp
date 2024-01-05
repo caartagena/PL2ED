@@ -111,7 +111,11 @@ Mesas generarMesaAle()
     mesa.setNumPersonas(generarCapacidad());
     mesa.setSituacion(generarLocalizacion());
     mesa.setOcupada(false);
-    cout << "Mesa generada" << endl;
+    cout << endl;
+    cout << "Mesa generada:" << endl;
+    cout << "Numero de mesa: " << mesa.getNumMesa() << endl;
+    cout << "Numero de personas: " << mesa.getNumPersonas() << endl;
+    cout << "Localizacion: " << mesa.getSituacion() << endl;
     cout << endl;
     return mesa;
 }
@@ -166,7 +170,7 @@ void eliminarMesaPorConsla()
     int numMesa;
     // int numPersonas;
     // string situacion;
-    cout << "Introduzca el numero de mesa que desea eliminar: (0 para eliminar por numero de personas y situacion): ";
+    cout << "Introduzca el numero de mesa que desea eliminar: ";
     cin >> numMesa;
     /*if (numMesa == 0)
     {
