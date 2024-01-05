@@ -50,6 +50,25 @@ public:
         inicializarMesas(nodo->izquierdo);
         inicializarMesas(nodo->derecho);
     }
+    int altura_arbol(Nodo *nodo)
+    {
+        if (nodo == nullptr)
+        {
+            return 0;
+        }
+
+        int altura_izq = altura_arbol(nodo->izquierdo);
+        int altura_der = altura_arbol(nodo->derecho);
+
+        if (altura_izq > altura_der)
+        {
+            return altura_izq + 1;
+        }
+        else
+        {
+            return altura_der + 1;
+        }
+    }
     bool esMesaAdecuada(Reserva2 &reserva, Mesas &mesa)
     {
         if (mesa.getOcupada() == true)

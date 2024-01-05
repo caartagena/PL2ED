@@ -278,6 +278,8 @@ int main()
             break;
         case 1:
             arbol.mostrarMesasInOrder(arbol.getRaiz());
+            cout << "Altura del arbol: " << endl;
+            cout << arbol.altura_arbol(arbol.getRaiz());
             break;
         case 2:
             eliminarMesaPorConsla();
